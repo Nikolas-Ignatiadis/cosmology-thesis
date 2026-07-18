@@ -1,4 +1,4 @@
-# Numerical analysis files
+# Numerical analysis files — Λ_sCDM thesis
 
 Numerical analysis files accompanying the undergraduate thesis *"Cosmological
 Constraints and Dark Energy Reconstruction with Bayesian Evidence: ΛCDM, wCDM,
@@ -21,13 +21,36 @@ notebook is the reference implementation and is documented in detail below.
 
 ## Requirements
 
+The notebooks were developed and run in **Jupyter Notebook under Anaconda**
+on Windows. Any Jupyter setup works. With Anaconda, create and activate a
+dedicated environment first, then install the extra packages *in that same
+environment* (otherwise Jupyter will not see them):
+
 ```
-pip install -U nautilus-sampler getdist numpy scipy matplotlib pandas
+conda create -n cosmo python=3.11
+conda activate cosmo
+pip install -U nautilus-sampler getdist numpy scipy matplotlib pandas jupyter
+jupyter notebook
 ```
 
-Runs on a standard laptop or Google Colab. A complete run of all fits takes
-several hours (each Nautilus fit uses n_live = 1500; evidences are re-computed
-over 5 random seeds).
+Runs on a standard laptop or Google Colab.
+
+### Indicative runtimes
+
+Timings on the author's machine — Intel Core i9-9900K (8 cores / 16 threads, 3.6 GHz), 16 GB RAM, Windows:
+
+| Notebook | Runtime |
+|---|---|
+| `CosmologicalConstraintsFinal.ipynb` | ~8–10 h (overnight), measured |
+| `IsolationExperiment.ipynb` | not timed separately — scale from ~10 min per Nautilus fit (see below) times the number of grid combinations you enable |
+| `AkarsuReproduction.ipynb` | not timed separately — a handful of fits, expect a few hours |
+| `Reconstruction.ipynb` | ~1 min, measured (no sampling; reads existing results) |
+
+The useful planning number: a single Nautilus fit with n_live = 1500 takes
+roughly 10 minutes on this machine, and every Bayesian evidence is
+re-computed over 5 random seeds, so evidence-grade results cost ~5× a plain
+fit. Total cost of any notebook ≈ (number of fits) × (~10 min) × (5 if
+evidences are needed).
 
 ## Data
 
